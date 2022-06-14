@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %> 
+</head>
+<body>
+<% include partials/menu %>
+  <!--================ Banner Section start =================-->
+  <section class="hero-banner hero-banner-sm text-center">
+    <div class="container">
+      <h1>Our Messages</h1>
+      <nav aria-label="breadcrumb" class="banner-breadcrumb">
+        <ol class="breadcrumb">
+          <!-- <li class="breadcrumb-item"><a href="/">Home</a></li> -->
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <!--================ Banner Section end =================-->
+
+  <!--================ Feature section start =================-->
+  <section class="section-margin">
+    <div class="container">
+      <div class="row">
+        <!-- loop over messages and render them -->
+        <% messages.forEach(m => { %>
+            <div class="col-lg-3 col-sm-6 col-xs-6 d-flex align-items-stretch">
+              <div class="card-feature text-center">
+                <!-- <div class="feature-icon">
+                  <img src="https://via.placeholder.com/200.png?text=message" alt="">
+                </div> -->
+                <!-- ejs to get name and date, after removing the .mp3 extension -->
+                <h3><%= m.name %></h3>
+                <% if (m.date !== "") { %>
+                  <p style="color: #745DC6"><%= m.date %></p>
+                <% } %>
+                <a href=/track?tracks=<%= m.name.toLowerCase().split(" ").join("-") %> class="btn">Tracks</a>
+              </div>
+            </div>
+        <% }) %>
+
+        <div class="clear"></div>
+        <% if (pages > 0) { %>
+          <ul id="pagination-tile" class="pagination text-center mx-auto">
+            <% if (current == 1) { %>
+                <li class="page-item disabled"><a class="page-link">First</a></li>
+            <% } else { %>
+                <li class="page-item"><a class="page-link" href="/messages?page=1">First</a></li class="page-item disabled">
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+                <li class="page-item disabled"><a class="page-link">...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                    <li class="page-item active"><a class="page-link"><%= i %></a></li>
+                <% } else { %>
+                    <li class="page-item"><a class="page-link" href="/messages?page=<%= i %>"><%= i %></a></li class="page-item">
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+                <li class="page-item disabled"><a class="page-link">Last</a></li>
+            <% } else { %>
+                <li class="page-item"><a class="page-link" href="/messages?page=<%= pages %>">Last</a class="page-link"></li class="page-item">
+            <% } %>
+          </ul>
+        <% } %>
+
+        <!-- <div class="col-md-6 col-lg-4">
+          <div class="card-feature text-center">
+            <div class="feature-icon">
+              <img src="img/home/png/001-unlock.png" alt="">
+            </div>
+            <h3>Secured Server</h3>
+            <p>Let place fly together third creature night at called fowl fill upon the grass </p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+  <!--================ Feature section end =================-->
+
+<% include partials/footer %>
+</body>
+<% include partials/script %>
+</html>

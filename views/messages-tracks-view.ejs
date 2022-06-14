@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %> 
+</head>
+<body>
+<% include partials/menu %>
+  <!--================ Banner Section start =================-->
+  <section class="hero-banner hero-banner-sm text-center">
+    <div class="container">
+      <h1>Our Messages</h1>
+      <nav aria-label="breadcrumb" class="banner-breadcrumb">
+        <ol class="breadcrumb">
+          <!-- <li class="breadcrumb-item"><a href="/">Home</a></li> -->
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <!--================ Banner Section end =================-->
+
+  <!--================ Feature section start =================-->
+  <section class="section-margin">
+    <div class="container">
+      <div class="row">
+        <!-- loop over messages and render them -->
+        <% tracks.forEach(m => { %>
+            <div class="col-lg-3 col-sm-6 col-xs-6 d-flex align-items-stretch">
+              <div class="card-feature text-center">
+                <!-- <div class="feature-icon">
+                  <img src="https://via.placeholder.com/200.png?text=message" alt="">
+                </div> -->
+                <!-- ejs to get name and date, after removing the .mp3 extension -->
+                <h3><%= m.name.split(".")[0].split("_")[0] %></h3>
+                <% if (m.date !== "") { %>
+                  <p style="color: #745DC6"><%= m.date %></p>
+                <% } %>
+                <a href=<%= m.webContentLink %> class="btn" download>Download</a>
+              </div>
+            </div>
+        <% }) %>
+
+        
+        <!-- <div class="col-md-6 col-lg-4">
+          <div class="card-feature text-center">
+            <div class="feature-icon">
+              <img src="img/home/png/001-unlock.png" alt="">
+            </div>
+            <h3>Secured Server</h3>
+            <p>Let place fly together third creature night at called fowl fill upon the grass </p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+  <!--================ Feature section end =================-->
+
+<% include partials/footer %>
+</body>
+<% include partials/script %>
+</html>
